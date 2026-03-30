@@ -193,6 +193,7 @@ def profile(request):
 
 @login_required
 def vendor_dashboard(request):
+    """Displays a vendor-specific dashboard."""
     # Fetch stores owned by the user
     user_stores = Store.objects.filter(vendor=request.user)
     # Filter products that belong to any store owned by this user
