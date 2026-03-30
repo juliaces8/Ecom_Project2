@@ -1,0 +1,74 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-dark text-white p-3">
+                    <h4 class="mb-0"><i class="bi bi-cart3"></i> Your Shopping Cart</h4>
+                </div>
+                <div class="card-body p-0">
+                    {% if items %}
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th class="ps-3">Product</th>
+                                        <th>Price</th>
+                                        <th class="text-center">Quantity</th>
+                                        <th>Subtotal</th>
+                                        <th class="text-end pe-3">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in items %}
+                                    <tr>
+                                        <td class="ps-3">
+                                            <div class="fw-bold text-dark">{{ item.product.name }}</div>
+                                            <small class="text-muted">Stock: {{ item.product.stock }}</small>
+                                        </td>
+                                        <td>${{ item.product.price }}</td>
+                                        <td>
+                                            <form action="{% url 'update_cart' item.product.id 'update' %}" method="post" class="d-flex justify-content-center">
+                                                {% csrf_token %}
+                                                <input type="number" name="quantity" value="{{ item.quantity }}" 
+                                                       min="1" max="{{ item.product.stock }}" 
+                                                       class="form-control form-control-sm text-center" style="width: 70px;">
+                                                <button type="submit" class="btn btn-sm btn-link text-primary"><i class="bi bi-arrow-clockwise"></i></button>
+                                            </form>
+                                        </td>
+                                        <td class="fw-bold">${{ item.total_price }}</td>
+                                        <td class="text-end pe-3">
+                                            <a href="{% url 'update_cart' item.product.id 'remove'%}" class="btn btn-sm btn-outline-danger">Remove</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="text-center py-5">
+                            <h5 class="text-muted">Your cart is empty.</h5>
+                            <a href="{% url 'product_list' %}" class="btn btn-primary mt-3">&larr; Start Shopping</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% if items %}
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
+                    <h5 class="card-title fw-bold mb-4">Order Summary</h5>
+                    <div class="h3 mb-4 text-primary fw-bold">${{ total }}</div>
+                    <a href="{% url 'checkout' %}" class="btn btn-success btn-lg w-100 mb-2">Checkout Now</a>
+                    <a href="{% url 'product_list' %}" class="btn btn-link w-100 text-muted text-decoration-none">
+                        &larr; Continue Shopping
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

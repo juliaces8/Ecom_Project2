@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>List a New Product</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Product</button>
+    </form>
+    <br>
+    <a href="{% url 'vendor_dashboard' %}">Cancel</a>
+</body>
+</html>

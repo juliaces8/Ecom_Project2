@@ -1,0 +1,35 @@
+Practical Task – eCommerce Application Part 1
+
+Planning
+
+1.	Identify the requirements of your system. Try thinking of the different users that will be using your system and how they will be interacting with this system. 
+a.	Users:
+i.	Vendors: Create stores and should be able to view, edit, and remove their store. Vendors should be able to add, remove, edit, and view products in their stores. Vendors should be able to view orders and track sales.
+ii.	Buyers: Need a marketplace to browse, a cart to store items selected, and checkout. They should be able to leave review for any products. (verified if previously purchased, unverified if no purchase history)
+
+2.	Plan the layout of your system's user interface to provide a good user experience. 
+•	List of products page
+•	Cart page
+•	A dedicated page for each vendor showing only their items, ability to add store, products, manage inventory, track sales
+•	Admin page to manage access, user profiles, etc.
+•	The Checkout Flow: A 3-step process (Cart Summary → Shipping/Email Entry → Success/Invoice sent).
+
+3. Layout how access to your program will be controlled and how you will secure your data. 
+•	Access Control:
+o	Login: Everyone must create an account as either a Buyer or a Seller.
+o	Seller dashboard: Only Sellers can create a store or list products. 
+o	Ownership: Each Seller can only edit its own store/product.
+•	Data Security:
+o	Scrambled passwords: System does not save actual password. Instead, the password is turned into a scrambled code.
+o	Hidden shopping carts: Other websites can’t peek at what’s in a buyer’s shopping cart.
+o	Password reset: When requested, a link to reset password is sent to work only once for limited time.
+•	Session Isolation: 
+o	Shopping carts are tied to the specific User in the database, ensuring buyers can only see their own items.
+
+4. You have to plan for failure as well. Consider your system and determine how the system should react or recover when unexpected behaviour occurs. 
+•	Database Connection Lost: Show “Try again in a few minutes” message
+•	Out of Stock Purchase: Show “Sorry, out of stock” message
+•	Invalid Email for Invoice
+•	Forgot Password: Use reset system with limited time
+•	Self-purchase prevention: Show red alert stating they can’t buy own product
+•	Self-review prevention: Show red alert stating they can’t review their own product

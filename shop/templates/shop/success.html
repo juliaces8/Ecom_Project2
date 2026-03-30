@@ -1,0 +1,18 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+    <div class="card shadow border-0 p-5">
+        <div class="display-1 text-success mb-4">✅</div>
+        <h1 class="fw-bold">Order Placed Successfully!</h1>
+        <p class="lead text-muted">{{ message }}</p>
+        <hr class="my-4">
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a href="{% url 'product_list' %}" class="btn btn-primary btn-lg px-4 gap-3">Continue Shopping</a>
+            {% if user.profile.role == 'vendor' %}
+                <a href="{% url 'vendor_dashboard' %}" class="btn btn-outline-secondary btn-lg px-4">View Sales</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

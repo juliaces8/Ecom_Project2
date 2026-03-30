@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .invoice-box { max-width: 800px; margin: auto; padding: 30px; border: 1px solid #eee; font-family: 'Helvetica', sans-serif; }
+        .item { border-bottom: 1px solid #eee; padding: 10px 0; }
+        .total { font-weight: bold; font-size: 20px; text-align: right; margin-top: 20px; }
+        .header { background: #333; color: white; padding: 20px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="invoice-box">
+        <div class="header">
+            <h1>MegaStore Invoice</h1>
+            <p>Order #{{ order.id }}</p>
+        </div>
+        <p>Hi {{ user.username }},</p>
+        <p>Thank you for your purchase! Here are your order details:</p>
+        
+        {% for item in cart_items %}
+        <div class="item">
+            <strong>{{ item.product.name }}</strong> x {{ item.quantity }} 
+            <span style="float: right;">${{ item.total_price }}</span>
+        </div>
+        {% endfor %}
+
+        <div class="total">
+            Total Amount: ${{ total_price }}
+        </div>
+        
+        <p style="margin-top: 40px; color: #777; font-size: 12px;">
+            This is an automated invoice. Thank you for shopping with MegaStore!
+        </p>
+    </div>
+</body>
+</html>
