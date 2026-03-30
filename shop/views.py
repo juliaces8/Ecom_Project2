@@ -215,6 +215,7 @@ def vendor_dashboard(request):
 
 @login_required
 def add_product(request):
+    """Allows a vendor to add a new product."""
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
