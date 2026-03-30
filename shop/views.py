@@ -265,6 +265,7 @@ def edit_product(request, pk):
 
 @login_required
 def delete_product(request, pk):
+    """Allows a vendor to delete a product they own, with confirmation."""
     product = get_object_or_404(Product, pk=pk, store__vendor=request.user)
     if request.method == 'POST':
         product.delete()
